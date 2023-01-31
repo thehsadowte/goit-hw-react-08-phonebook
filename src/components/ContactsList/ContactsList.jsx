@@ -1,13 +1,13 @@
 // import PropTypes from 'prop-types';
 import css from './ContactsList.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { getContacts } from '../../redux/slices/contactsSlice';
-import { getFilter } from '../../redux/slices/filterSlice';
+import { getContacts } from '../../redux/contacts/contactsSlice';
+import { getFilter } from '../../redux/filter/filterSlice';
 import { useEffect } from 'react';
 import {
   getContactsThunk,
   deleteContactThunk,
-} from 'redux/thunks/contactsThunk';
+} from 'redux/contacts/operations';
 
 export default function ContactsList() {
   const dispatch = useDispatch();

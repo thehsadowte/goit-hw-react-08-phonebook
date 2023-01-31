@@ -1,6 +1,6 @@
 import css from './Filter.module.css';
 import { useDispatch } from 'react-redux';
-import { setFilter } from 'redux/slices/filterSlice';
+import { setFilter } from 'redux/filter/filterSlice';
 
 export default function Filter() {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ export default function Filter() {
           className={css.input}
           type="text"
           name="filter"
-          onChange={e => filterHandler(e)}
+          onChange={filterHandler}
         />
       </label>
     </>

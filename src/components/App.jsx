@@ -6,18 +6,28 @@ import css from './App.module.css';
 import { useSelector } from 'react-redux';
 import { getContacts } from 'services/API';
 
-export function App() {
+import { Routes, Route } from 'react-router-dom';
+
+export const App = () => {
+  return (
+    <Routes>
+      <Route path="/layout"></Route>
+    </Routes>
+  );
+};
+
+export function App2() {
   const contacts = useSelector(getContacts);
 
   return (
     <div className={css.container}>
       <ContactForm />
-      {/* {contacts.length > 0 && ( */}
-      <>
-        <Filter />
-        <ContactsList />
-      </>
-      {/* )} */}
+      {contacts && (
+        <>
+          <Filter />
+          <ContactsList />
+        </>
+      )}
     </div>
   );
 }
