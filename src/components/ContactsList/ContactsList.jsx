@@ -17,7 +17,7 @@ export default function ContactsList() {
 
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
-  // const dispatch = useDispatch();
+
   const deleteContact = id => {
     return () => {
       dispatch(deleteContactThunk(id));
@@ -47,13 +47,3 @@ export default function ContactsList() {
     </>
   );
 }
-
-// ContactsList.propTypes = {
-//   contacts: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       number: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       id: PropTypes.string.isRequired,
-//     }).isRequired
-//   ).isRequired,
-// };
