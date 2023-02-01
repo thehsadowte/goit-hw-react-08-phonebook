@@ -34,7 +34,8 @@ const Layout = () => {
     <Box
       w="100%"
       minH="630px"
-      bgGradient="linear-gradient(#188da4 0%, #098ea5 25%, #0abdca 50%)"
+      bgGradient=" linear-gradient(#0B0C10, #1F2833);
+"
     >
       <Container maxW="container.sm" pt="20px">
         <Flex flexDirection="column">
