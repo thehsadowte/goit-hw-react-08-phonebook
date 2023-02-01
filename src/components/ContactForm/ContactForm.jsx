@@ -3,7 +3,7 @@ import css from './ContactForm.module.css';
 // import { addContact, getContacts } from 'redux/contacts/contactsSlice';
 import { addContact } from 'redux/contacts/operations';
 import { useDispatch, useSelector } from 'react-redux';
-import { Notify } from 'notiflix';
+// import { Notify } from 'notiflix';
 import { selectContacts } from 'redux/contacts/selectors';
 
 export const ContactForm = () => {
