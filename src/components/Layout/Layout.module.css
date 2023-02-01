@@ -1,0 +1,14 @@
+.linkItem>a {
+    font-family: 'Fira Sans';
+    font-style: italic;
+    font-size: 21px;
+    color: teal;
+}
+
+.linkItem:hover>a {
+    text-decoration: underline;
+}
+
+.linkItem:nth-child(3) {
+    margin-right: 15px;
+}

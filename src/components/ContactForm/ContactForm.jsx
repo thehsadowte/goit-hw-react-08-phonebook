@@ -1,40 +1,38 @@
 import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
-import { addContact, getContacts } from 'redux/contacts/contactsSlice';
+// import { addContact, getContacts } from 'redux/contacts/contactsSlice';
+import { addContact } from 'redux/contacts/operations';
 import { useDispatch, useSelector } from 'react-redux';
 import { Notify } from 'notiflix';
+import { selectContacts } from 'redux/contacts/selectors';
 
-const ContactForm = () => {
+export const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
-  const normalizeValue = value => value.toLowerCase().trim();
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    const form = event.target;
-    const name = form.elements.name.value;
-    const number = form.elements.number.value;
-    const exist = contacts.some(
-      contact => normalizeValue(contact.name) === normalizeValue(name)
-    );
+  const contacts = useSelector(selectContacts);
 
-    if (exist) {
-      Notify.info('This contact is already exist');
+  const onFormSubmit = e => {
+    e.preventDefault();
+    const name = e.target.elements.name.value;
+    const number = e.target.elements.number.value;
+    const checkContact = contacts.find(contact => contact.name === name);
+    if (checkContact) {
+      alert('Already in Contacts');
       return;
     }
-    dispatch(
-      addContact({
-        name,
-        number,
-        id: nanoid(),
-      })
-    );
-    form.reset();
+    const newContact = {
+      name: name,
+      number: number,
+      id: nanoid(),
+    };
+
+    dispatch(addContact(newContact));
+    e.target.reset();
   };
 
   return (
     <div className={css.container}>
-      <form className={css.form} onSubmit={handleSubmit}>
+      <form className={css.form} onSubmit={onFormSubmit}>
         <h1>PhoneBook</h1>
         <div className="wrapper">
           <label>

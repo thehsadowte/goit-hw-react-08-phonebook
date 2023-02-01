@@ -1,42 +1,29 @@
 // import PropTypes from 'prop-types';
 import css from './ContactsList.module.css';
-import { useSelector, useDispatch } from 'react-redux';
-import { getContacts } from '../../redux/contacts/contactsSlice';
-import { getFilter } from '../../redux/filter/filterSlice';
-import { useEffect } from 'react';
-import {
-  getContactsThunk,
-  deleteContactThunk,
-} from 'redux/contacts/operations';
+import { deleteContact } from 'redux/contacts/operations';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectContacts, selectFilter } from 'redux/contacts/selectors';
 
-export default function ContactsList() {
+export const ContactsList = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getContactsThunk());
-  }, [dispatch]);
 
-  const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilter);
+  const contacts = useSelector(selectContacts);
+  const filter = useSelector(selectFilter);
 
-  const deleteContact = id => {
-    return () => {
-      dispatch(deleteContactThunk(id));
-    };
+  const setFilteredContacts = () => {
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
   };
-
-  const normalizeValue = value => value.toLowerCase().trim();
-  const visibleContacts = contacts.filter(contact =>
-    normalizeValue(contact.name).includes(normalizeValue(filter))
-  );
   return (
     <>
       <ul className={css.list}>
-        {visibleContacts.map(({ id, name, number }) => (
+        {setFilteredContacts().map(({ id, name, number }) => (
           <li className={css.item} key={id}>
-            {name}, {number}
+            {name}: {number}
             <button
               className={css.btn}
-              onClick={deleteContact(id)}
+              onClick={() => dispatch(deleteContact(id))}
               type="button"
             >
               Delete
@@ -46,4 +33,4 @@ export default function ContactsList() {
       </ul>
     </>
   );
-}
+};

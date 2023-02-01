@@ -1,0 +1,23 @@
+.logBtn {
+    cursor: pointer;
+    background: repeating-linear-gradient(45deg, #0B0C10, transparent 100px);
+    box-shadow: 4px 4px 8px #ffffff, -4px -4px 8px #97a1a1;
+    border: 1px solid #97a1a1;
+    /* color: #45A29E; */
+    color: #66FCF1;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 0.618em 1.2em;
+    border-radius: 0.4em;
+    font-family: 'Dosis', Georgia, cursive;
+    /* display: block; */
+
+    min-width: 340px;
+    margin-top: 20px;
+    transition: all 300ms;
+}
+
+.logBtn:hover {
+    box-shadow: 4px 4px 8px #c19c66, -4px -4px 8px #fffaa4;
+    scale: 1.05;
+}

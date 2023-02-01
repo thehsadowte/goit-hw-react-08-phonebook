@@ -1,16 +1,30 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { logOut } from 'redux/auth/operations';
 
-export const getFilter = state => state.filter;
+const initialState = {
+  filter: '',
+};
 
 const filterSlice = createSlice({
+  // Имя слайса
   name: 'filter',
-  initialState: '',
+  // Начальное состояние редюсера слайса
+  initialState: initialState,
+  // Объект редюсеров
   reducers: {
-    setFilter(_, action) {
-      return action.payload;
+    filterContacts: (state, action) => {
+      state.filter = action.payload;
     },
   },
+  extraReducers: builder =>
+    builder
+      // logout
+      .addCase(logOut.fulfilled, state => {
+        state.filter = '';
+      }),
 });
 
-export const { setFilter } = filterSlice.actions;
+// Генераторы экшенов
+export const { filterContacts } = filterSlice.actions;
+// Редюсер слайса
 export const filterReducer = filterSlice.reducer;

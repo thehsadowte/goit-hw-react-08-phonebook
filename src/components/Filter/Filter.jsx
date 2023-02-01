@@ -1,12 +1,12 @@
 import css from './Filter.module.css';
-import { useDispatch } from 'react-redux';
-import { setFilter } from 'redux/filter/filterSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { filterContacts } from 'redux/filter/filterSlice';
+import { selectFilter } from 'redux/contacts/selectors';
 
-export default function Filter() {
+export const Filter = () => {
   const dispatch = useDispatch();
-  const filterHandler = e => {
-    dispatch(setFilter(e.target.value));
-  };
+  const filter = useSelector(selectFilter);
+
   return (
     <>
       <h2 className={css.title}>Contacts</h2>
@@ -16,9 +16,10 @@ export default function Filter() {
           className={css.input}
           type="text"
           name="filter"
-          onChange={filterHandler}
+          value={filter}
+          onChange={e => dispatch(filterContacts(e.target.value))}
         />
       </label>
     </>
   );
-}
+};
